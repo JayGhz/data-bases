@@ -4,9 +4,9 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": 0,
-    "zoomLevel": 1,
+    "scrollTop": -358.4674,
+    "scrollLeft": -402.5484,
+    "zoomLevel": 0.2,
     "show": 431,
     "database": 4,
     "databaseName": "",
@@ -176,25 +176,6 @@
         "meta": {
           "updateAt": 1724125909906,
           "createAt": 1724123015271
-        }
-      },
-      "dM0kKBrXsXfCFprJqLabd": {
-        "id": "dM0kKBrXsXfCFprJqLabd",
-        "name": "Asegurado",
-        "comment": "",
-        "columnIds": [],
-        "seqColumnIds": [],
-        "ui": {
-          "x": 561,
-          "y": 297,
-          "zIndex": 162,
-          "widthName": 60,
-          "widthComment": 60,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1724124115447,
-          "createAt": 1724124104231
         }
       },
       "leosnWL0eRE1wd_UPmcNS": {
@@ -1116,34 +1097,6 @@
       }
     },
     "relationshipEntities": {
-      "JtGKVJ7jW69jkOj0LCyx9": {
-        "id": "JtGKVJ7jW69jkOj0LCyx9",
-        "identification": false,
-        "relationshipType": 16,
-        "startRelationshipType": 2,
-        "start": {
-          "tableId": "lqEcD0-obcC4wipT5uR0C",
-          "columnIds": [
-            "SkFPdLeqs4YWQ_dovl3pi"
-          ],
-          "x": 514,
-          "y": 157,
-          "direction": 1
-        },
-        "end": {
-          "tableId": "HZ0o2BKU_p8WuHrRzqfUl",
-          "columnIds": [
-            "kOPM3RxKByAnq820FFOfr"
-          ],
-          "x": 405,
-          "y": 157,
-          "direction": 2
-        },
-        "meta": {
-          "updateAt": 1724123657647,
-          "createAt": 1724123657647
-        }
-      },
       "H7GVYGO4Rjo9akcH_A7zR": {
         "id": "H7GVYGO4Rjo9akcH_A7zR",
         "identification": false,
@@ -1451,12 +1404,6 @@
         "comment": 1724123657645
       }
     ],
-    "JtGKVJ7jW69jkOj0LCyx9": [
-      "relationshipEntities",
-      1724123657645,
-      1724123712652,
-      {}
-    ],
     "obxeYXHTcdABdcAlurGUw": [
       "tableColumnEntities",
       1724123726214,
@@ -1492,14 +1439,6 @@
       1724123966740,
       -1,
       {}
-    ],
-    "dM0kKBrXsXfCFprJqLabd": [
-      "tableEntities",
-      1724124104230,
-      1724124117305,
-      {
-        "name": 1724124111896
-      }
     ],
     "leosnWL0eRE1wd_UPmcNS": [
       "tableEntities",
