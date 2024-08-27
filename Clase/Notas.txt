@@ -1,0 +1,2 @@
+1. Como el precio de venta depende de cada sucursal y cada producto, se añade una
+nueva tabla.
