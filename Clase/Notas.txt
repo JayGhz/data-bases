@@ -3,4 +3,4 @@
     - Ya que el precio de venta depende de la tabla Sucursal y Producto, 
     la nueva tabla(Producto_Sucursal), tendra un primary_key compuesto
 
-2. La semana 3 se realizo el tema de algebra relacional.
+2. En laa semana 3 se realizo el tema de algebra relacional.
