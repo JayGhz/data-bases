@@ -81,3 +81,211 @@ where Total = ( SELECT MIN(Total)
            GROUP BY s.CompanyName) SQ);
 
 
+-- Ejercicio 9
+-- Indicar el nombre del proveedor con la menor cantidad de items de
+-- productos vendidos y el nombre del proveedor con la mayor cantidad de 4
+-- items de productos vendidos
+
+SELECT CompanyName, Total
+FROM
+   (SELECT s.CompanyName, SUM(Quantity) as Total
+   FROM Products P
+   JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+   JOIN Suppliers S ON P.SupplierID = S.SupplierID
+   GROUP BY s.CompanyName) SQ
+where Total = ( SELECT MIN(Total)
+           FROM (SELECT s.CompanyName, SUM(Quantity) Total
+           FROM Products P
+           JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+           JOIN Suppliers S ON P.SupplierID = S.SupplierID
+           GROUP BY s.CompanyName) SQ)
+union
+SELECT CompanyName, Total
+FROM
+   (SELECT s.CompanyName, SUM(Quantity) as Total
+   FROM Products P
+   JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+   JOIN Suppliers S ON P.SupplierID = S.SupplierID
+   GROUP BY s.CompanyName) SQ
+where Total = ( SELECT MAX(Total)
+           FROM (SELECT s.CompanyName, SUM(Quantity) Total
+           FROM Products P
+           JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+           JOIN Suppliers S ON P.SupplierID = S.SupplierID
+           GROUP BY s.CompanyName) SQ);
+
+-- 2da forma creando tablas virtuales (vistas)
+
+create view Cantidad_items_por_proveedor
+as
+   SELECT s.CompanyName, SUM(Quantity) as Total
+   FROM Products P
+   JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+   JOIN Suppliers S ON P.SupplierID = S.SupplierID
+   GROUP BY s.CompanyName
+
+-- muestra el proveedor con la menor cantidad de items vendidos
+-- y el proveedor con la mayor cantidad de item vendidos
+SELECT CompanyName, Total
+FROM Cantidad_items_por_proveedor
+where total = ( select min(total) from Cantidad_items_por_proveedor)
+union
+SELECT CompanyName, Total
+FROM Cantidad_items_por_proveedor
+where total = ( select max(total) from Cantidad_items_por_proveedor)
+
+
+
+
+-- Ejercicio 10
+-- Indicar el nombre de la categoria con la mayor cantidad de items de
+-- productos vendidos.
+SELECT CategoryName, Total
+from (SELECT CategoryName, SUM(Quantity) as Total
+	FROM Products P
+	JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+	JOIN Categories C ON P.CategoryID = C.CategoryID
+	GROUP BY CategoryName) CQ
+where Total = (select max(Total)
+			FROM (SELECT CategoryName, SUM(Quantity) as Total
+			FROM Products P
+			JOIN OrderDetails OD ON P.ProductID = OD.ProductID
+			JOIN Categories C ON P.CategoryID =
+			C.CategoryID
+			GROUP BY CategoryName) CQ)
+
+-- Ejercicio 11
+-- Para cada empleado que atendio al menos cinco pedidos, indicar el
+-- nombre y apellido del empleado, y
+-- la cantidad de pedidos que atendio.
+SELECT FirstName, LastName, Count(OrderID) as Quantity
+FROM Employees E
+JOIN Orders O ON E.EmployeeID = O.EmployeeID
+GROUP BY FirstName,LastName 
+HAVING Count(OrderID) >=5
+order by Quantity asc
+
+-- Ejercicio 13
+-- Listar los nombres de los productos cuyo precio unitario sea mayor a
+-- 18, especificamente productos que inicien con letra C
+SELECT ProductName, UnitPrice
+FROM Products
+WHERE UnitPrice > 18 and productname like 'C%'
+
+-- Indicar la cantidad de clientes que han realizado pedidos.
+SELECT COUNT( DISTINCT (CustomerID))
+FROM Orders
+
+-- Ejercicio 22
+-- Lista los nombres de las categorias y el precio promedio de sus
+-- productos.
+SELECT CategoryName, AVG(UnitPrice)
+FROM Products P, Categories C
+WHERE P.CategoryID = C.CategoryID
+GROUP BY CategoryName
+
+SELECT CategoryName, AVG(UnitPrice) as Promedio
+FROM Products P
+join Categories C on P.CategoryID = C.CategoryID
+GROUP BY CategoryName
+
+-- Ejercicio 23
+-- Lista la categoria, el nombre del producto con mayor
+-- precio, mostrar precio del producto.
+SELECT CategoryName, ProductName, UnitPrice
+FROM Products P, Categories C
+WHERE P.CategoryID = C.CategoryID 
+AND UnitPrice = (SELECT MAX(UnitPrice) FROM Products P)
+
+-- mostrar por categoria, el mayor precio
+   SELECT CategoryName,  max(UnitPrice) as mayorprecio
+	FROM Products P, Categories C
+	WHERE P.CategoryID = C.CategoryID 
+	Group by CategoryName
+	order by CategoryName
+
+-- Listar nombre de productos de cada categor�a  
+-- que tiene mayor precio
+	SELECT c.CategoryName, P.ProductName, UnitPrice
+	FROM Products P, Categories C, 
+		(SELECT C.CategoryName, max(UnitPrice) as mayorprecio
+		FROM Products P, Categories C
+		WHERE P.CategoryID = C.CategoryID 
+		Group by C.CategoryName) SQ
+	WHERE P.CategoryID = C.CategoryID 
+		and C.CategoryName = SQ.CategoryName 
+		and UnitPrice in ( select mayorprecio
+			from (SELECT CategoryName, max(UnitPrice) as mayorprecio
+				  FROM Products P, Categories C
+				  WHERE P.CategoryID = C.CategoryID 
+				  Group by CategoryName) SQ)
+
+
+-- Ejercicio 25
+-- Listar los nombres de los clientes que no tienen �rdenes registradas.
+SELECT ContactName
+FROM Customers
+WHERE CustomerID NOT IN (SELECT DISTINCT CustomerID
+FROM Orders)
+
+
+-- Ejercicio 28
+-- Indicar el nombre del cliente con mas pedidos y 
+-- ademas el cliente con menos pedidos realizados
+SELECT Contactname, Quantity
+from (SELECT ContactName, COUNT(OrderID) Quantity
+		FROM Orders O, Customers C
+		WHERE O.CustomerID = C.CustomerID
+		GROUP BY ContactName) R
+where Quantity = (Select max(Quantity)
+				from (SELECT ContactName, COUNT(OrderID) Quantity
+				FROM Orders O, Customers C
+				WHERE O.CustomerID = C.CustomerID
+				GROUP BY ContactName) R)
+union
+SELECT Contactname, Quantity
+from (SELECT ContactName, COUNT(OrderID) Quantity
+		FROM Orders O, Customers C
+		WHERE O.CustomerID = C.CustomerID
+		GROUP BY ContactName) R
+where Quantity = (Select min(Quantity)
+				from (SELECT ContactName, COUNT(OrderID) Quantity
+				FROM Orders O, Customers C
+				WHERE O.CustomerID = C.CustomerID
+				GROUP BY ContactName) R)
+
+-- Ejercicio 34
+-- Lista los nombres de los clientes, N�mero de orden de pedido y fechas
+-- de transporte en la cual la fechas de transporte este entre los meses
+-- octubre y noviembre del anio 1997 ordenado por nombre de cliente
+select C.ContactName, OD.OrderID, OD.ShippedDate
+from Orders OD join Customers C
+on OD.CustomerID = C.CustomerID
+where ShippedDate between '1997-10-1' and '1997-11-1'
+order by C.ContactName
+
+-- 2da forma utilizando functions datetime
+select C.ContactName, OD.OrderID, OD.ShippedDate
+from Orders OD join Customers C
+on OD.CustomerID = C.CustomerID
+where year(ShippedDate) = 1997 
+and (month(ShippedDate)=10 or month(ShippedDate)=11)
+order by C.ContactName
+
+-- 3ra forma 
+select C.ContactName, OD.OrderID, OD.ShippedDate
+from Orders OD join Customers C
+on OD.CustomerID = C.CustomerID
+where year(ShippedDate) = 1997 
+and month(ShippedDate) in (10,11)
+order by C.ContactName
+
+-- Ejercicio 35
+-- Lista el nombre del cliente Pavarotti, N�mero de orden de pedido y
+-- fechas de transporte en la cual la fechas de transporte est� entre los
+-- meses octubre y noviembre del anio 1997
+select C.ContactName, OD.OrderID, OD.ShippedDate
+from Orders OD join Customers C
+on OD.CustomerID = C.CustomerID
+where ShippedDate between '1997-10-1' and '1997-11-1'
+and C.ContactName like '%Pavarotti%'
