@@ -33,10 +33,10 @@ on p.ProductID = od.ProductID -- Unir por ProductID mostrando todos los producto
 order by p.ProductID
 
 
---Ejercicio 4
---Por cada pais de procedencia del cliente, 
---indicar el nombre del pais
---y la cantidad de pedidos atendidos.
+-- Ejercicio 4
+-- Por cada pais de procedencia del cliente, 
+-- indicar el nombre del pais
+-- y la cantidad de pedidos atendidos.
 SELECT c.Country, COUNT (o.OrderID) Quantity
 FROM Customers C JOIN Orders O 
 ON C.CustomerID = O.CustomerID
@@ -52,10 +52,10 @@ on e.EmployeeID = o.EmployeeID -- Unir por EmployeeID
 GROUP BY e.EmployeeID, e.FirstName, e.LastName -- Agrupar por EmployeeID, FirstName y LastName
 order by e.EmployeeID -- Ordenar por EmployeeID
 
---Ejercicio 3
---Por cada cliente, indicar el nombre del cliente, los nombres de los
---productos adquiridos
---y la cantidad de items por producto adquirido en total.
+-- Ejercicio 3
+-- Por cada cliente, indicar el nombre del cliente, los nombres de los
+-- productos adquiridos
+-- y la cantidad de items por producto adquirido en total.
 SELECT ContactName, ProductName, SUM(Quantity) as ItemsTotal -- Seleccionar los campos a mostrar
 FROM Customers C -- Seleccionar la tabla Customers
 JOIN Orders O ON C.CustomerId = O.CustomerID -- Unir la tabla Orders
@@ -63,9 +63,9 @@ JOIN OrderDetails OD ON O.OrderID = OD.OrderID -- Unir la tabla OrderDetails
 JOIN Products P ON OD.ProductID = P.ProductID -- Unir la tabla Products
 GROUP BY ContactName, ProductName -- Agrupar por ContactName y ProductName
 
---Ejercicio 8
---Indicar el nombre del proveedor con la menor cantidad de items de
---productos vendidos.
+-- Ejercicio 8
+-- Indicar el nombre del proveedor con la menor cantidad de items de
+-- productos vendidos.
 SELECT CompanyName, Total
 FROM
    (SELECT s.CompanyName, SUM(Quantity) as Total
