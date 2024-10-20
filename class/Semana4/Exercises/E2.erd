@@ -282,25 +282,6 @@
           "createAt": 1725323927939
         }
       },
-      "UM40V-a_MjJ4Wl34XcGRy": {
-        "id": "UM40V-a_MjJ4Wl34XcGRy",
-        "name": "",
-        "comment": "",
-        "columnIds": [],
-        "seqColumnIds": [],
-        "ui": {
-          "x": 674.0305,
-          "y": 121.3238,
-          "zIndex": 190,
-          "widthName": 60,
-          "widthComment": 60,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1725323946157,
-          "createAt": 1725323942039
-        }
-      },
       "YavQ1pDzTVh-CcM_KRQgt": {
         "id": "YavQ1pDzTVh-CcM_KRQgt",
         "name": "registros",
@@ -1269,40 +1250,7 @@
     },
     "indexEntities": {},
     "indexColumnEntities": {},
-    "memoEntities": {
-      "TFmTHQcbF1HpjN8WqNh1g": {
-        "id": "TFmTHQcbF1HpjN8WqNh1g",
-        "value": "",
-        "ui": {
-          "x": 280.5901,
-          "y": 605,
-          "zIndex": 113,
-          "width": 116,
-          "height": 100,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1725322691367,
-          "createAt": 1725322684662
-        }
-      },
-      "bzrnJSb5bJyr7tdpQ26Lz": {
-        "id": "bzrnJSb5bJyr7tdpQ26Lz",
-        "value": "",
-        "ui": {
-          "x": 678.4526,
-          "y": 643.6544,
-          "zIndex": 166,
-          "width": 116,
-          "height": 100,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1725323227160,
-          "createAt": 1725323222665
-        }
-      }
-    }
+    "memoEntities": {}
   },
   "lww": {
     "Bet2QEp-QD7opitGQfZr_": [
@@ -1521,14 +1469,6 @@
       -1,
       {}
     ],
-    "TFmTHQcbF1HpjN8WqNh1g": [
-      "memoEntities",
-      1725322684661,
-      1725322692921,
-      {
-        "value": 1725322691367
-      }
-    ],
     "0gAzTT2O1JZEriLbMkyBj": [
       "tableEntities",
       1725322694561,
@@ -1600,12 +1540,6 @@
         "dataType": 1725323087837
       }
     ],
-    "bzrnJSb5bJyr7tdpQ26Lz": [
-      "memoEntities",
-      1725323222664,
-      1725323230628,
-      {}
-    ],
     "0Rg1ydyayAn4-EMuQeQ9d": [
       "tableEntities",
       1725323760051,
@@ -1659,12 +1593,6 @@
       {
         "name": 1725323934300
       }
-    ],
-    "UM40V-a_MjJ4Wl34XcGRy": [
-      "tableEntities",
-      1725323942038,
-      1725323946386,
-      {}
     ],
     "l_SyTzRge56RDwKib8cOI": [
       "tableColumnEntities",

@@ -36,39 +36,12 @@
     "memoIds": []
   },
   "collections": {
-    "tableEntities": {
-      "JQQ9mGNdVWZNAKrth_mN6": {
-        "id": "JQQ9mGNdVWZNAKrth_mN6",
-        "name": "",
-        "comment": "",
-        "columnIds": [],
-        "seqColumnIds": [],
-        "ui": {
-          "x": 206,
-          "y": 81,
-          "zIndex": 2,
-          "widthName": 60,
-          "widthComment": 60,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1725935180629,
-          "createAt": 1725935172512
-        }
-      }
-    },
+    "tableEntities": {},
     "tableColumnEntities": {},
     "relationshipEntities": {},
     "indexEntities": {},
     "indexColumnEntities": {},
     "memoEntities": {}
   },
-  "lww": {
-    "JQQ9mGNdVWZNAKrth_mN6": [
-      "tableEntities",
-      1725935172510,
-      1725935181615,
-      {}
-    ]
-  }
+  "lww": {}
 }
