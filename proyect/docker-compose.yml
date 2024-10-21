@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    cap_add:
+      - SYS_PTRACE
+    privileged: true
+    container_name: arboris_db
+    environment:
+      SA_PASSWORD: "Jay924287851@"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    user: root
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./sqlserver:/var/opt/mssql/data

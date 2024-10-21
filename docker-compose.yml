@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    cap_add:
+      - SYS_PTRACE
+    privileged: true
+    container_name: container_sqlserver
+    environment:
+      SA_PASSWORD: "Jay924287851@"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    user: root
+    ports:
+      - "1434:1433"
+    volumes:
+      - ./sqlserver:/var/opt/mssql/data
+
+  mongo:
+    image: mongo:latest
+    container_name: container_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongopass123
+      MONGO_INITDB_ROOT_DATABASE: Testing
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo:/data/db
