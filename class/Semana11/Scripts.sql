@@ -51,7 +51,7 @@ select dbo.Cuenta_Emp()
 
 --3
 --Defina una funcion donde ingrese el id del empleado y
---retorne la cantidad de pedidos registrados en el a�o 
+--retorne la cantidad de pedidos registrados en el año 
 --2016
 
 select  year(GETDATE())
@@ -79,7 +79,7 @@ Use Northwind
 
 --Defina una funcion donde ingrese el id del empleado y
 --retorne la cantidad de pedidos registrados 
---en el presente a�o
+--en el presente año
 
 Create FUNCTION PedidosEmpleado_v2(@id int) RETURNS int
 AS
@@ -201,7 +201,7 @@ Go
 ========================================
 
 Ejemplo: Defina una funcion que liste los registros
-de los pedidos para un determinado a�o e incluya: 
+de los pedidos para un determinado año e incluya: 
 � El c�digo del pedido 
 � La fecha del pedido 
 � El nombre del producto � 
@@ -250,7 +250,7 @@ Go
 Select * from dbo.Inventario()
 
 --Ejemplo: Defina una funcion que permita generar un
---reporte de ventas por empleado, por a�o. En este
+--reporte de ventas por empleado, por año. En este
 --proceso la funcion debe retornar: los datos del empleado,
 --la cantidad de pedidos registrados y el monto total por
 --empleado
@@ -273,14 +273,14 @@ BEGIN
 RETURN
 END
 GO
---imprimir el reporte del a�o 2016
+--imprimir el reporte del año 2016
 Select * from dbo.ReporteVentas(2016)
 
 
 --crear una funcion que muestre
 --idempleado, apellido, cantidad de pedidos del empleadi
 --monto total 
---en un a�o espec�fico de un determinado empleado
+--en un año espec�fico de un determinado empleado
 
 CREATE FUNCTION dbo.ReporteVentasV2(@y int,@emp int)
 RETURNS @tabla TABLE
@@ -300,6 +300,6 @@ BEGIN
 RETURN
 END
 GO
---imprimir el reporte del a�o 2016 del idempleado = 2
+--imprimir el reporte del año 2016 del idempleado = 2
 Select * from dbo.ReporteVentasv2(2016, 2)
 
