@@ -1,6 +1,6 @@
 
 --FUNCIONES ESCALARES
---Crear una funci�n que retorne el precio promedio de
+--Crear una funcion que retorne el precio promedio de
 --todos los productos
 Use NORTHWND1
 
@@ -34,7 +34,7 @@ print dbo.PrecioPromedio()
 
 
 -- 2 
---Crear una funci�n que retorne el numero
+--Crear una funcion que retorne el numero
 --total de empleados
 
 CREATE FUNCTION Cuenta_Emp() RETURNS int
@@ -50,7 +50,7 @@ select dbo.Cuenta_Emp()
 
 
 --3
---Defina una funci�n donde ingrese el id del empleado y
+--Defina una funcion donde ingrese el id del empleado y
 --retorne la cantidad de pedidos registrados en el a�o 
 --2016
 
@@ -77,7 +77,7 @@ print dbo.PedidosEmpleado(4)
 
 Use Northwind
 
---Defina una funci�n donde ingrese el id del empleado y
+--Defina una funcion donde ingrese el id del empleado y
 --retorne la cantidad de pedidos registrados 
 --en el presente a�o
 
@@ -96,7 +96,7 @@ print dbo.PedidosEmpleado_v2(4)
 
 ====================================
 
-Ejemplo: NorthWind:Defina una funci�n donde ingrese el nombre del pa�s
+Ejemplo: NorthWind:Defina una funcion donde ingrese el nombre del pa�s
 destinatario del pedido y retorne el total dela 
 cantidad total de unidades vendidas para dichos pedidos
 
@@ -131,7 +131,7 @@ print 'cantidad de unidades de Brazil' + str(dbo.TotalUnidades_pais('Brazil'))
 print 'cantidad de unidades de Francia' + str(dbo.TotalUnidades_pais('France'))
 
 ==============================
-Ejemplo: Defina una funci�n que liste los registros 
+Ejemplo: Defina una funcion que liste los registros 
 de los clientes,e incluya el nombre del Pa�s
 
 CREATE FUNCTION dbo.Clientes() 
@@ -139,7 +139,7 @@ RETURNS TABLE
 AS 
  RETURN select * from customers 
  go
- --ejecutando la funci�n
+ --ejecutando la funcion
 select * from dbo.Clientes() 
 where Country = 'france'
 
@@ -163,7 +163,7 @@ AS
 
  select * from dbo.itemstotalesxproveedor()
 
- --creando  la funci�n principal
+ --creando  la funcion principal
  Create Function Proveedor_menor_item()
  RETURNS TABLE 
 AS 
@@ -173,12 +173,12 @@ AS
 	where Total = (SELECT MIN(Total)
 			   FROM dbo.itemstotalesxproveedor()))
 
---Ejecutar la funci�n principal
+--Ejecutar la funcion principal
 select * from dbo.proveedor_menor_item()
 
 ===========================
 
-Ejercicio: Defina una funci�n que liste los registros de
+Ejercicio: Defina una funcion que liste los registros de
 los clientes e incluya :
 � C�digo
 � Nombre
@@ -200,7 +200,7 @@ Go
 
 ========================================
 
-Ejemplo: Defina una funci�n que liste los registros
+Ejemplo: Defina una funcion que liste los registros
 de los pedidos para un determinado a�o e incluya: 
 � El c�digo del pedido 
 � La fecha del pedido 
@@ -229,7 +229,7 @@ Select * from dbo.PedidosAnio(2016)
 
 
 --FUNCIONES DE TABLA MULTISENTENCIAS 
---Ejemplo: Defina una funci�n que retorne 
+--Ejemplo: Defina una funcion que retorne 
 --los PRODUCTOS que se acaban de registrar en la base de datos.
 
 CREATE FUNCTION dbo.Inventario() 
@@ -249,9 +249,9 @@ Go
 --ejecutandola funcion 
 Select * from dbo.Inventario()
 
---Ejemplo: Defina una funci�n que permita generar un
+--Ejemplo: Defina una funcion que permita generar un
 --reporte de ventas por empleado, por a�o. En este
---proceso la funci�n debe retornar: los datos del empleado,
+--proceso la funcion debe retornar: los datos del empleado,
 --la cantidad de pedidos registrados y el monto total por
 --empleado
 
@@ -277,7 +277,7 @@ GO
 Select * from dbo.ReporteVentas(2016)
 
 
---crear una funci�n que muestre
+--crear una funcion que muestre
 --idempleado, apellido, cantidad de pedidos del empleadi
 --monto total 
 --en un a�o espec�fico de un determinado empleado
