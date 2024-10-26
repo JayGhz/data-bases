@@ -1,8 +1,6 @@
 CREATE DATABASE ArBoris;
+USE  ArBoris;
 
--- tables
--- Table: amateurs
-USE  ArBoris
 CREATE TABLE amateurs (
     id int  NOT NULL,
     user_id int  NOT NULL,
@@ -225,7 +223,7 @@ ALTER TABLE users ADD CONSTRAINT Users_Type_Subscription
 INSERT INTO subscription_types (id, name_type, description, start_date, end_date, cost) VALUES
 (1, 'Básico', 'Acceso a la plataforma', '2021-01-01', '2021-12-31', 0),
 (2, 'Premium', 'Acceso a la plataforma, soporte experto', '2021-01-01', '2021-12-31', 10),
-(3, 'VIP', 'Acceso a la plataforma, soporte experto y dnotifacione personalizadas', '2021-01-01', '2021-12-31', 20);
+(3, 'VIP', 'Acceso a la plataforma, soporte experto y notificaciones personalizadas', '2021-01-01', '2021-12-31', 20);
 
 
 INSERT INTO users (id, subscription_type_id, username, email, password, address, phone) VALUES
