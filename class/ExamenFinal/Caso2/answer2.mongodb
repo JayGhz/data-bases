@@ -1,0 +1,31 @@
+db.createCollection("eventos", { 
+    "validator": { 
+        "$jsonSchema": { 
+            "bsonType": "object", 
+            "properties": { 
+                "_id": { 
+                    "bsonType": "objectId" 
+                }, 
+                "nombre": { 
+                    "bsonType": "string" 
+                }, 
+                "precio": { 
+                    "bsonType": "decimal" 
+                }, 
+                "lugar": { 
+                    "bsonType": "object", 
+                    "properties": { 
+                        "nombre": { 
+                            "bsonType": "string" 
+                        }, 
+                        "capacidad": { 
+                            "bsonType": "int" 
+                        } 
+                    }, 
+                    "required": ["nombre", "capacidad"] 
+                } 
+            }, 
+            "required": ["_id", "nombre", "precio"] 
+        } 
+    }, 
+});

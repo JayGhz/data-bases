@@ -1,0 +1,67 @@
+db.createColletion("accommodations",
+    {
+        validator:
+        {
+            $jsonSchema:
+            {
+                bsonType: "object",
+                description: "Documento que describe un alojamiento", required: ["name", "bedrooms", "beds", "number_of_reviews", "amenities", "price", "host", "address", "reviews"],
+                properties:
+                {
+                    "name":
+                    {
+                        bsonType: "string",
+                        description: "El campo es un string y es obligatorio"
+                    },
+                    "bedrooms":
+                    {
+                        bsonType: "integer",
+                        description: "El campo es un entero y es obligatorio"
+                    },
+                    "beds":
+                    {
+                        bsonType: "integer",
+                        description: "El campo es un entero y es obligatorio"
+                    },
+                    "number_of_reviews":
+                    {
+                        bsonType: "integer",
+                        description: "El campo es un string y es obligatorio"
+                    },
+                    "amenities":
+                    {
+                        bsonType: "array",
+                        description: "El campo es un arreglo y es obligatorio", items:
+                        {
+                            bsonType: "string"
+                        }
+                    },
+                    "price":
+                    {
+                        bsonType: "number",
+                        description: "El campo es un entero y es obligatorio"
+                    },
+                    "host":
+                    {
+                        bsonType: "object",
+                        description: "El campo es un objeto y es obligatorio", required: ["host_name", "host_location", "host_about", "host reviews_count"]
+                    },
+                    "address":
+                    {
+                        bsonType: "object",
+                        description: "El campo es un objeto y es obligatorio", required: ["city", "country"]
+                    },
+                    "reviews":
+                    {
+                        bsonType: "array",
+                        description: "El campo es un arreglo y es obligatorio", items:
+                        {
+                            bsonType: "object",
+                            required: ["reviewer_name", "comment"]
+                        }
+                    }
+                }
+            }
+        }
+    }
+)
