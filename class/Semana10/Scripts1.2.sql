@@ -17,9 +17,8 @@ Execute dbo.listaClientes
 Exec listaclientes
 
 
---Modificar el procedimiento
---para que muestre los clientes
---cuya ciudad contiene la letra A
+-- Mostar los clientes cuya 
+-- ciudad contiene la letra A
 Alter procedure listaClientes
 AS
 begin
@@ -29,6 +28,8 @@ begin
 	@letra
 end
 go
+
+Execute dbo.listaClientes
 
 --Ejecutamos el procedimiento
 
@@ -61,7 +62,7 @@ end
 go
 
 --Ejecuto Store Procedure, ingreso
--- dos par�metros de entrada
+-- dos parametros de entrada
 Execute usp_PedidosbyFechas '1997-09-12', '1997-09-23'
 
 Exec usp_PedidosbyFechas '1996-09-12', '1997-09-23'
@@ -87,7 +88,7 @@ Execute usp_PedidosbyFechas_anio 1997
 
 
 --crear un procedimiento que muestre los pedidos, fecha de pedido, id del cliente
---de un cliente ingresado como par�metro en un determinado a�o
+--de un cliente ingresado como parametro en un determinado año
 CREATE PROCEDURE usp_PedidosClienteAnio
 @id varchar(5),
 @a int = 1996
@@ -96,6 +97,7 @@ AS
 	From Orders o JOIN Customers c
 	ON o.customerid = c.customerid
 	WHERE Year(o.OrderDate) = @a AND c.customerid = @id
+End
 Go
 
 SELECT * FROM Customers
@@ -103,7 +105,7 @@ SELECT * FROM Customers
 --MUESTRA LOS PEDIDOS DEL CLIENTE TORTU DEL A�O 1996
 execute usp_PedidosClienteAnio @id= 'TORTU'
 
---MUESTRA LOS PEDIDOS DEL CLIENTE HANAR DEL A�O 1997
+--MUESTRA LOS PEDIDOS DEL CLIENTE HANAR DEL AÑO 1997
 execute usp_PedidosClienteAnio @ID= 'hanar', @a = 1997
 
 --MUESTRA LOS PEDIDOS DEL CLIENTE CHOPS DEL A�O 1997
@@ -114,7 +116,7 @@ execute usp_PedidosClienteAnio 'CHOPS', 1998
 --crear un procedimiento que muestre
 --el pedido, fecha de pedido, nombre del producto,
 --precio unitario y cantidad vendida
---de un cliente determinado en un a�o espec�fico
+--de un cliente determinado en un año especifico
 create PROCEDURE usp_PedidosClienteAnio
 @id varchar(5),
 @anio int = 1996

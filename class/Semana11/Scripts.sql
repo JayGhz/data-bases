@@ -96,9 +96,9 @@ print dbo.PedidosEmpleado_v2(4)
 
 ====================================
 
-Ejemplo: NorthWind:Defina una funcion donde ingrese el nombre del pa�s
-destinatario del pedido y retorne el total dela 
-cantidad total de unidades vendidas para dichos pedidos
+-- Ejemplo: NorthWind:Defina una funcion donde ingrese el nombre del pa�s
+-- destinatario del pedido y retorne el total dela 
+-- cantidad total de unidades vendidas para dichos pedidos
 
 CREATE FUNCTION TotalUnidades_pais(@pais varchar(15)) 
 RETURNS int 

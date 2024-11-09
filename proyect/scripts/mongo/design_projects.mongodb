@@ -1,0 +1,45 @@
+db.createCollection("design_projects",
+    {
+        validator:
+        {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "DesignProjects Object Validation Schema",
+                "required": ["nombre_proyecto", "fechas", "designer_id", "estado"],
+                "properties": {
+                    "_id": {
+                        "bsonType": "objectId",
+                        "description": "ID único del proyecto de diseño"
+                    },
+                    "nombre_proyecto": {
+                        "bsonType": "string",
+                        "description": "Nombre del proyecto de diseño"
+                    },
+                    "fechas": {
+                        "bsonType": "object",
+                        "required": ["inicio", "fin"],
+                        "properties": {
+                            "inicio": {
+                                "bsonType": "date",
+                                "description": "Fecha de inicio del proyecto"
+                            },
+                            "fin": {
+                                "bsonType": "date",
+                                "description": "Fecha de finalización del proyecto"
+                            }
+                        }
+                    },
+                    "designer_id": {
+                        "bsonType": "string",
+                        "description": "ID del diseñador asociado al proyecto"
+                    },
+                    "estado": {
+                        "bsonType": "string",
+                        "description": "Estado actual del proyecto"
+                    }
+                }
+            }
+        }
+
+    }
+)

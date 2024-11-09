@@ -1,0 +1,89 @@
+db.createCollection("plants",
+    {
+        validator:
+        {
+
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Plants Object Validation Schema",
+                "required": ["nombre", "especie", "tipo", "detalles_cuidado", "registros_cuidado"],
+                "properties": {
+                    "_id": {
+                        "bsonType": "objectId",
+                        "description": "ID único de la planta"
+                    },
+                    "nombre": {
+                        "bsonType": "string",
+                        "description": "Nombre común de la planta"
+                    },
+                    "especie": {
+                        "bsonType": "string",
+                        "description": "Especie de la planta"
+                    },
+                    "tipo": {
+                        "bsonType": "object",
+                        "required": ["id_tipo", "nombre_tipo", "descripcion"],
+                        "properties": {
+                            "id_tipo": {
+                                "bsonType": "string",
+                                "description": "ID del tipo de planta"
+                            },
+                            "nombre_tipo": {
+                                "bsonType": "string",
+                                "description": "Nombre del tipo de planta"
+                            },
+                            "descripcion": {
+                                "bsonType": "string",
+                                "description": "Descripción del tipo de planta"
+                            }
+                        }
+                    },
+                    "detalles_cuidado": {
+                        "bsonType": "object",
+                        "required": ["riego", "luz", "temperatura_ideal", "humedad"],
+                        "properties": {
+                            "riego": {
+                                "bsonType": "string",
+                                "description": "Frecuencia de riego"
+                            },
+                            "luz": {
+                                "bsonType": "string",
+                                "description": "Requisitos de luz"
+                            },
+                            "temperatura_ideal": {
+                                "bsonType": "string",
+                                "description": "Rango de temperatura ideal"
+                            },
+                            "humedad": {
+                                "bsonType": "string",
+                                "description": "Nivel de humedad recomendado"
+                            }
+                        }
+                    },
+                    "registros_cuidado": {
+                        "bsonType": "array",
+                        "description": "Historial de registros de cuidado de la planta",
+                        "items": {
+                            "bsonType": "object",
+                            "required": ["fecha", "tipo", "comentarios"],
+                            "properties": {
+                                "fecha": {
+                                    "bsonType": "date",
+                                    "description": "Fecha del registro de cuidado"
+                                },
+                                "tipo": {
+                                    "bsonType": "string",
+                                    "description": "Tipo de cuidado realizado"
+                                },
+                                "comentarios": {
+                                    "bsonType": "string",
+                                    "description": "Comentarios sobre el cuidado realizado"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+)
