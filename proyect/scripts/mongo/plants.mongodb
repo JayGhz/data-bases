@@ -2,7 +2,6 @@ db.createCollection("plants",
     {
         validator:
         {
-
             "$jsonSchema": {
                 "bsonType": "object",
                 "title": "Plants Object Validation Schema",
@@ -87,3 +86,206 @@ db.createCollection("plants",
         }
     }
 )
+
+// --------------------------------------------
+
+db.plants.insertMany([
+    {
+        "nombre": "Suculenta de María",
+        "especie": "Suculenta",
+        "tipo": {
+            "id_tipo": "1",
+            "nombre_tipo": "Suculentas",
+            "descripcion": "Plantas que almacenan agua en sus hojas"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 7 días",
+            "luz": "Luz directa",
+            "temperatura_ideal": "22-28°C",
+            "humedad": "Baja"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-01-01"),
+                "tipo": "Podar",
+                "comentarios": "Se podaron las hojas secas"
+            }
+        ]
+    },
+    {
+        "nombre": "Cactus de Carlos",
+        "especie": "Cactus",
+        "tipo": {
+            "id_tipo": "2",
+            "nombre_tipo": "Cactus",
+            "descripcion": "Plantas que almacenan agua en su tallo"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 14 días",
+            "luz": "Sombra",
+            "temperatura_ideal": "18-24°C",
+            "humedad": "Baja"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-02-01"),
+                "tipo": "Cambio de maceta",
+                "comentarios": "Se cambió la maceta"
+            }
+        ]
+    },
+    {
+        "nombre": "Helecho de Ana",
+        "especie": "Helecho",
+        "tipo": {
+            "id_tipo": "3",
+            "nombre_tipo": "Helechos",
+            "descripcion": "Plantas que no tienen flores"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 7 días",
+            "luz": "Luz indirecta",
+            "temperatura_ideal": "18-22°C",
+            "humedad": "Alta"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-03-01"),
+                "tipo": "Riego",
+                "comentarios": "Se regó con menos frecuencia"
+            }
+        ]
+    },
+    {
+        "nombre": "Orquídea de Pedro",
+        "especie": "Orquídea",
+        "tipo": {
+            "id_tipo": "4",
+            "nombre_tipo": "Orquídeas",
+            "descripcion": "Plantas con flores exóticas"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 14 días",
+            "luz": "Luz directa, Sombra",
+            "temperatura_ideal": "18-25°C",
+            "humedad": "Media"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-04-01"),
+                "tipo": "Fertilización",
+                "comentarios": "Se fertilizó con abono orgánico"
+            }
+        ]
+    },
+    {
+        "nombre": "Girasolín de Laura",
+        "especie": "Girasol",
+        "tipo": {
+            "id_tipo": "5",
+            "nombre_tipo": "Girasoles",
+            "descripcion": "Plantas con flores amarillas"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 7 días",
+            "luz": "Luz directa",
+            "temperatura_ideal": "20-30°C",
+            "humedad": "Baja"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-05-01"),
+                "tipo": "Podar",
+                "comentarios": "Se podaron las hojas secas"
+            }
+        ]
+    },
+    {
+        "nombre": "Albahaca de Juan",
+        "especie": "Albahaca",
+        "tipo": {
+            "id_tipo": "6",
+            "nombre_tipo": "Hierbas Aromáticas",
+            "descripcion": "Plantas comestibles y aromáticas"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 14 días",
+            "luz": "Sombra",
+            "temperatura_ideal": "18-24°C",
+            "humedad": "Media"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-06-01"),
+                "tipo": "Cambio de maceta",
+                "comentarios": "Se cambió la maceta"
+            }
+        ]
+    },
+    {
+        "nombre": "Manzanilla de Sofía",
+        "especie": "Manzanilla",
+        "tipo": {
+            "id_tipo": "7",
+            "nombre_tipo": "Plantas Medicinales",
+            "descripcion": "Plantas utilizadas en la medicina tradicional"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 7 días",
+            "luz": "Luz indirecta",
+            "temperatura_ideal": "20-25°C",
+            "humedad": "Media"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-07-01"),
+                "tipo": "Riego",
+                "comentarios": "Se regó con menos frecuencia"
+            }
+        ]
+    },
+    {
+        "nombre": "Aloe Vera de Marta",
+        "especie": "Aloe Vera",
+        "tipo": {
+            "id_tipo": "8",
+            "nombre_tipo": "Plantas de Interior",
+            "descripcion": "Plantas que purifican el aire y son adecuadas para interiores"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 14 días",
+            "luz": "Luz directa, Sombra",
+            "temperatura_ideal": "20-28°C",
+            "humedad": "Baja"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-08-01"),
+                "tipo": "Fertilización",
+                "comentarios": "Se fertilizó con abono orgánico"
+            }
+        ]
+    },
+    {
+        "nombre": "Venus Atrapamoscas de Javier",
+        "especie": "Dionaea muscipula",
+        "tipo": {
+            "id_tipo": "9",
+            "nombre_tipo": "Plantas de Bajo Mantenimiento",
+            "descripcion": "Plantas que no requieren mucho cuidado"
+        },
+        "detalles_cuidado": {
+            "riego": "Cada 7 días",
+            "luz": "Luz directa",
+            "temperatura_ideal": "22-28°C",
+            "humedad": "Media"
+        },
+        "registros_cuidado": [
+            {
+                "fecha": ISODate("2021-09-01"),
+                "tipo": "Podar",
+                "comentarios": "Se podaron las hojas secas"
+            }
+        ]
+    }
+]);

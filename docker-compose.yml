@@ -23,7 +23,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mongopass123
-      MONGO_INITDB_ROOT_DATABASE: Testing
+      MONGO_INITDB_ROOT_DATABASE: ArBoris
     ports:
       - "27017:27017"
     volumes:
