@@ -1,8 +1,7 @@
 /*14 DE OCTUBRE*/
 
 --Ejercicio 23
---Lista  el nombre del producto con mayor
---precio, mostrar precio del producto y su respectiva categoría
+-- Obtener el producto mas caro, mostrar el nombre de la categoria, nombre del producto y precio
 SELECT CategoryName, ProductName, UnitPrice
 FROM Products P, Categories C
 WHERE P.CategoryID = C.CategoryID 
@@ -15,9 +14,8 @@ AND UnitPrice = (SELECT MAX(UnitPrice) FROM Products P)
 	group by CategoryName
 
 	
---Listar nombre de productos de cada categoría  
---que tiene mayor precio
-	SELECT c.CategoryName, P.ProductName, UnitPrice 
+-- Obtner el producto mas caro de cada categoria
+	SELECT C.CategoryName, P.ProductName, UnitPrice 
 	FROM Products P, Categories C, 
 		(SELECT C.CategoryName, max(UnitPrice) as mayorprecio
 		FROM Products P, Categories C
@@ -101,7 +99,7 @@ from Employees e right join Employees j on e.ReportsTo=j.EmployeeID
  group by e.Country, YEAR(o.OrderDate)
  order by YEAR(o.OrderDate),3 desc
 
- }--------------------------------------------
+ --------------------------------------------
 
  /*1.Mostrar de la tabla Orders, para los pedidos 
  cuya diferencia entre la fecha de despacho y 
@@ -154,11 +152,11 @@ group by o.ShipCountry,YEAR(o.OrderDate)
 having SUM(od.UnitPrice*od.Quantity*(1-od.Discount))>45000
 order by 3 desc
 
-4.De cada producto que haya tenido venta en por lo 
-menos 20 transacciones (ordenes) del año 1997 mostrar 
-el código, nombre y cantidad de unidades vendidas y 
-cantidad de ordenes en las que se vendió
-*/
+-- 4.De cada producto que haya tenido venta en por lo 
+-- menos 20 transacciones (ordenes) del año 1997 mostrar 
+-- el código, nombre y cantidad de unidades vendidas y 
+-- cantidad de ordenes en las que se vendió
+
 
 select p.ProductID,p.ProductName,
 		SUM(od.Quantity) 'Unidades Vendidas',
