@@ -148,7 +148,7 @@ where Country = 'france'
 --el nombre del proveedor con la menor cantidad de �tems de
 --productos vendidos.
 
---Funci�n que muestra la cantidad  total de 
+--Funcion que muestra la cantidad  total de 
 --items de productos vendidos por proveedor
 CREATE FUNCTION dbo.itemstotalesxproveedor() 
 RETURNS TABLE 
