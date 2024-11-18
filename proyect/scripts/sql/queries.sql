@@ -1,90 +1,113 @@
+
+-- QUERIES
+----------------------------------------------------------------------------------------------------------------------------
 SELECT dp.project_name AS Proyecto, u.username AS Diseñador
 FROM design_projects dp
-JOIN designers d ON dp.designer_id = d.id
-JOIN users u ON d.user_id = u.id;
+    JOIN designers d ON dp.designer_id = d.id
+    JOIN users u ON d.user_id = u.id;
+
+----------------------------------------------------------------------------------------------------------------------------
 
 SELECT u.username, s.name_type AS subscription_type
 FROM users u
-JOIN subscription_types s ON u.subscription_type_id = s.id;
+    JOIN subscription_types s ON u.subscription_type_id = s.id;
+
+----------------------------------------------------------------------------------------------------------------------------
 
 SELECT d.company_name AS Compañia, p.plant_name AS Planta
 FROM designers d JOIN users u ON d.id = u.id
-JOIN plants p ON u.id = p.user_id
+    JOIN plants p ON u.id = p.user_id
+
+----------------------------------------------------------------------------------------------------------------------------
 
 SELECT d.company_name, d.experience_level, COUNT(p.id) AS total_projects
 FROM designers d
-LEFT JOIN design_projects p ON d.id = p.designer_id
+    LEFT JOIN design_projects p ON d.id = p.designer_id
 GROUP BY d.company_name, d.experience_level;
 
-SELECT TOP 5 hr.id, u.username AS user_name, hr.problem_description, hr.created_at
+----------------------------------------------------------------------------------------------------------------------------
+
+SELECT TOP 5
+    hr.id, u.username AS user_name, hr.problem_description, hr.created_at
 FROM help_requests hr
-JOIN amateurs a ON hr.amateur_id = a.id
-JOIN users u ON a.user_id = u.id
+    JOIN amateurs a ON hr.amateur_id = a.id
+    JOIN users u ON a.user_id = u.id
 ORDER BY hr.created_at DESC;
 
 
 
+-- PROCEDURES
+----------------------------------------------------------------------------------------------------------------------------
+
+GO
 CREATE PROCEDURE BuscarPlantasPorTipo
-@tipoPlanta VARCHAR(250)
+    @tipoPlanta VARCHAR(250)
 AS
 BEGIN
-    SELECT p.plant_name AS Planta,u.username AS Usuario,pt.name_type AS Tipo
+    SELECT p.plant_name AS Planta, u.username AS Usuario, pt.name_type AS Tipo
     FROM plants p
-    JOIN plant_types pt ON p.plant_type_id = pt.id
-    JOIN users u ON p.user_id = u.id
+        JOIN plant_types pt ON p.plant_type_id = pt.id
+        JOIN users u ON p.user_id = u.id
     WHERE pt.name_type = @tipoPlanta;
 END
 GO
 
 EXEC  BuscarPlantasPorTipo 'Suculentas'
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE ObtenerAyudasPendientesPorAmateur
-@idAmateur INT
+    @idAmateur INT
 AS
 BEGIN
     SELECT hr.request_type AS TipoSolicitud, hr.problem_description AS Descripcion, se.name AS ExpertoAsignado
     FROM help_requests hr
-    JOIN support_experts se ON hr.support_expert_id = se.id
+        JOIN support_experts se ON hr.support_expert_id = se.id
     WHERE hr.amateur_id = @idAmateur AND hr.status = 'Pendiente';
 END
 GO
 
 EXEC ObtenerAyudasPendientesPorAmateur 3
 
+----------------------------------------------------------------------------------------------------------------------------
 
-
+GO
 CREATE PROCEDURE support_and_users
-@supportname varchar(250)
+    @supportname varchar(250)
 AS
-  BEGIN
-	SELECT sp.name AS Nombre, u.username AS Usuarios_ayudados
-	FROM support_experts sp
-	JOIN help_requests hr ON hr.support_expert_id = sp.id
-	JOIN amateurs a ON hr.amateur_id = a.id
-	JOIN users u ON a.user_id = u.id
-	WHERE sp.name = @supportname
+BEGIN
+    SELECT sp.name AS Nombre, u.username AS Usuarios_ayudados
+    FROM support_experts sp
+        JOIN help_requests hr ON hr.support_expert_id = sp.id
+        JOIN amateurs a ON hr.amateur_id = a.id
+        JOIN users u ON a.user_id = u.id
+    WHERE sp.name = @supportname
 END
 GO
 
 EXEC support_and_users 'Lucía Torres'
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE recommendation_username
-@nombre varchar(250)
+    @nombre varchar(250)
 AS
- BEGIN
+BEGIN
     SELECT pa.plant_name AS Planta, hrp.recommendation_given AS Recomendacion
-	FROM users u JOIN plants pa ON u.id = pa.user_id
-	JOIN help_request_plants hrp ON pa.id = hrp.plant_id
-	WHERE u.username = @nombre
+    FROM users u JOIN plants pa ON u.id = pa.user_id
+        JOIN help_request_plants hrp ON pa.id = hrp.plant_id
+    WHERE u.username = @nombre
 END
 GO
 
 
 EXEC recommendation_username 'maria123'
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE ObtenerProyectosPorDiseñador
     @designerId INT
 AS
@@ -103,7 +126,9 @@ GO
 
 EXEC ObtenerProyectosPorDiseñador @designerId = 3;
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE ObtenerAyudaPorAmateur
     @amateurId INT
 AS
@@ -120,35 +145,41 @@ END
 GO
 EXEC ObtenerAyudaPorAmateur @amateurId = 1;
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE contarUsuariosPorSuscripcion
 AS
 BEGIN
     SELECT st.name_type AS Suscripcion, COUNT(u.id) AS NumeroUsuarios
     FROM subscription_types st
-    LEFT JOIN users u ON st.id = u.subscription_type_id
+        LEFT JOIN users u ON st.id = u.subscription_type_id
     GROUP BY st.name_type;
 END
 GO
 
 EXEC contarUsuariosPorSuscripcion;
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE get_help_requests_by_type
     @request_type VARCHAR(100)
 AS
 BEGIN
     SELECT hr.id, u.username AS user_name, hr.problem_description, hr.created_at, hr.status
     FROM help_requests hr
-    JOIN amateurs a ON hr.amateur_id = a.id
-    JOIN users u ON a.user_id = u.id
+        JOIN amateurs a ON hr.amateur_id = a.id
+        JOIN users u ON a.user_id = u.id
     WHERE hr.request_type = @request_type;
 END;
 GO
 
 EXEC get_help_requests_by_type 'Riego';
 
+----------------------------------------------------------------------------------------------------------------------------
 
+GO
 CREATE PROCEDURE get_projects_by_date_range
     @start_date DATE,
     @end_date DATE
@@ -156,7 +187,7 @@ AS
 BEGIN
     SELECT dp.project_name, dp.client_name, dp.start_date, dp.end_date, d.company_name
     FROM design_projects dp
-    JOIN designers d ON dp.designer_id = d.id
+        JOIN designers d ON dp.designer_id = d.id
     WHERE dp.start_date BETWEEN @start_date AND @end_date;
 END;
 GO
@@ -165,6 +196,10 @@ EXEC get_projects_by_date_range '2021-01-01', '2021-12-31';
 
 
 
+-- FUNCTIONS
+----------------------------------------------------------------------------------------------------------------------------
+
+GO
 CREATE FUNCTION project_progress(@project_id INT)
 RETURNS DECIMAL(5, 2)
 AS
@@ -193,7 +228,8 @@ BEGIN
     END
 
     RETURN @progress;
-END;
+END
+GO
 
 SELECT
     dp.id AS ProjectID,
@@ -202,13 +238,14 @@ SELECT
     dbo.project_progress(dp.id) AS ProjectProgress
 FROM
     design_projects dp
-JOIN
+    JOIN
     users u ON dp.designer_id = u.id
 WHERE
     dp.id = 1;
 
+----------------------------------------------------------------------------------------------------------------------------
 
-
+GO
 CREATE FUNCTION top_designer()
 RETURNS INT
 AS
@@ -230,11 +267,13 @@ BEGIN
 
     RETURN @top_designer_id;
 END;
+GO;
 
 SELECT dbo.top_designer();
 
+----------------------------------------------------------------------------------------------------------------------------
 
-
+GO
 CREATE FUNCTION recommend_plants(@amateur_id INT)
 RETURNS VARCHAR(255)
 AS
@@ -251,10 +290,11 @@ BEGIN
         SELECT DISTINCT favorite_plants_amateur
         FROM amateurs
         WHERE interests_amateur = @interests
-        AND id != @amateur_id
+            AND id != @amateur_id
     ) AS distinct_plants;
 
     RETURN @recommendations;
-END;
+END
+GO
 
 SELECT dbo.recommend_plants(1);
