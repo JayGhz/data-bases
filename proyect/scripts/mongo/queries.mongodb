@@ -1,0 +1,41 @@
+// Obtener todos los proyectos que tengan una duración de entre 3 y 6 meses
+db.design_projects.aggregate([
+    {
+        $project:
+        {
+            nombre_proyecto: 1, duracion_meses:
+                { $divide: [{ $subtract: ["$fechas.fin", "$fechas.inicio"] }, 1000 * 60 * 60 * 24 * 30] }
+        }
+    }, {
+        $match: {
+            duracion_meses:
+                { $gte: 3, $lte: 6 }
+        }
+    }
+])
+
+// Obtner la cantdad de registro de cada planta
+db.plants.aggregate([
+    {
+        $project:
+        {
+            nombre: 1, cantidad_registros_cuidado:
+                { $size: "$registros_cuidado" }
+        }
+    }
+]).pretty()
+
+
+// Actualizar el riego de las plantas que necesitan luz directa a "Cada 10 días"
+db.plants.updateMany(
+    {
+        "detalles_cuidado.luz": "Luz directa"
+    },
+    {
+        $set:
+        {
+            "detalles_cuidado.riego": "Cada 10 días"
+
+        }
+    }
+)
