@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -15,7 +13,7 @@ services:
     ports:
       - "1434:1433"
     volumes:
-      - ./sqlserver:/var/opt/mssql/data
+      - ./volumes/sqlserver:/var/opt/mssql/data
 
   mongo:
     image: mongo:latest
@@ -27,4 +25,13 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo:/data/db
+      - ./volumes/mongo:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: container_redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--requirepass", "jh07ar23"]
+    volumes:
+      - ./volumes/redis:/data
